@@ -57,12 +57,20 @@ class MenuItemView<ContentView: View>: NSView {
     }
     
     private func setUpEffectView() {
+		let cornerRadius: CGFloat = {
+			if #available(macOS 26, *) {
+				return 8
+			} else {
+				return 4
+			}
+		}()
+		
         effectView.state = .active
         effectView.material = .selection
         effectView.isEmphasized = true
         effectView.blendingMode = .behindWindow
         effectView.wantsLayer = true
-        effectView.layer?.cornerRadius = 4
+        effectView.layer?.cornerRadius = cornerRadius
         effectView.layer?.cornerCurve = .continuous
     }
     
